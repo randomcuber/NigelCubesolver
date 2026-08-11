@@ -35,12 +35,32 @@ public class RohsStepperMotor implements Motor{
 
     int motorStepCounter = 0;
     public void doTurn(double stepsToTurn, boolean direction) throws InterruptedException {
-        for (){//TODO for all steps to turn
-            //TODO for all pins, set the corresponding "in" to high(if 1) or low(if 0) based on the step in the step sequence
-            if (direction){
-                motorStepCounter;//TODO go to the previous step
+        for (int i=0; i<stepsToTurn; i++){//for all steps to turn
+            if (stepSequence[motorStepCounter][0] == 1){//these if statements are to see if a signal should be sent or not.
+                // one is sent, 0 is not. one if statement for each pin.
+                in1.high();//doing stuff
             } else{
-                motorStepCounter;//TODO go to next step in the sequence
+                in1.low();//not doing stuff
+            }
+            if (stepSequence[motorStepCounter][1] == 1){
+                in2.high();
+            } else{
+                in2.low();
+            }
+            if (stepSequence[motorStepCounter][2] == 1){
+                in3.high();
+            } else{
+                in3.low();
+            }
+            if (stepSequence[motorStepCounter][3] == 1){
+                in4.high();
+            } else{
+                in4.low();
+            }
+            if (direction){
+                motorStepCounter = ((motorStepCounter-1)+stepSequence.length)%stepSequence.length;//go to the previous step if turning the other way.
+            } else{
+                motorStepCounter = (motorStepCounter+1)%stepSequence.length;//go to next step in the sequence
             }
             LockSupport.parkNanos(1000000);//wait 1 millisecond
 
@@ -50,12 +70,13 @@ public class RohsStepperMotor implements Motor{
 
     public void turn(double numRotations){
         boolean direction = false;
-        if (){//TODO if numRotations is negative
-            direction;//TODO set direction to true
+        if (numRotations < 0){//if negative
+            direction = true;
             numRotations = numRotations*-1;//make it positive now that we have adjusted direction.
         }
         try {
-            doTurn((int) (Math.round(32 * 64 * 2 *numRotations)), direction);//the multiplication is just ticks per revolution x gear ratio x 2 because half stepping
+            doTurn((int) (Math.round(32 * 64 * 2 *numRotations)), direction);//the multiplication is
+            // just ticks per revolution x gear ratio x 2 because half stepping
         } catch (InterruptedException e) {
             System.out.println("Motor in trouble");
         } catch (Exception e) {
