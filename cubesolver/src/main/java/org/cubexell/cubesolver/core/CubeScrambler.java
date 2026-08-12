@@ -36,7 +36,8 @@ public class CubeScrambler{
 	public String[] getScramble(int numMoves){
 		String[] scramble = new String[numMoves];
 		scramble[0] = randomScrambleMove();
-		String scrambleMove = randomScrambleMove();//so intellij stops complaining
+		String scrambleMove;
+		/*String*/ scrambleMove = randomScrambleMove();//so intellij stops complaining
 		boolean getScrambleRepeat;
 		for (int i = 1; i < numMoves; i++){
 			getScrambleRepeat = true;
