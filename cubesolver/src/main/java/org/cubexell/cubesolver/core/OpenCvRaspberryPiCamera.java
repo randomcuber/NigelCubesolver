@@ -266,21 +266,25 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
 
     public void captureImage() {
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("libcamera-jpeg", "-o", outputImage, "--width", Integer.toString(imageWidth),
-                    "--height", Integer.toString(imageHeight), "--timeout", "1000");
-            //this is basically running a command in terminal that takes a picture with these parameters.
+            ProcessBuilder processBuilder = new ProcessBuilder(
+                    "rpicam-jpeg",
+                    "-o", outputImage,
+                    "--width", Integer.toString(imageWidth),
+                    "--height", Integer.toString(imageHeight),
+                    "--timeout", "1000"
+            );
 
             Process process = processBuilder.start();
 
             int exitCode = process.waitFor();
 
-            if (exitCode == 0) {//makes sure it was able to take the picture
+            if (exitCode == 0) {
                 System.out.println("Image captured successfully: " + outputImage);
             } else {
                 System.out.println("Error capturing image, exit code: " + exitCode);
             }
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();//stops program if error occurs and shows where it happened
+            e.printStackTrace();
         }
     }
 
