@@ -205,9 +205,9 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
                         findColor(1500+offsetX,300+offsetY,150,150),
                 },
                 {
-                        findColor(950+offsetX,1160+offsetY,98,200),
+                        findColor(950+offsetX,1160+offsetY,98,225),
                         center,
-                        findColor(1500+offsetX,650+offsetY,230,150)
+                        findColor(1550+offsetX,650+offsetY,230,150)
                 },
                 {
                         findColor(730+offsetX,1725+offsetY,120,125),
